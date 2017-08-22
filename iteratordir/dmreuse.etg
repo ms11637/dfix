@@ -1,0 +1,10 @@
+[Version Information]
+Flow Version = 1
+[DataFlow SourceTargetView]
+DataFlowChildWindow(Select Columns) = 0,168,38,220,90,272,196
+DataFlowChildWindow(Source_dmhr:T1) = 0,56,38,108,90,272,196
+DataFlowChildWindow(Target_empdates) = 0,314,39,366,91,314,338
+[Dependency View]
+Coord(Item,START_PRC) = 120,30
+Coord(Item,DEP_MAIN) = 342,30
+Coord(Item,DEP_99) = 230,31

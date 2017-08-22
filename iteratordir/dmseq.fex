@@ -1,0 +1,111 @@
+-*DM_JOB_TYPE=1
+-*DM_USERID=dm
+-*DM_REQ_ACT=N
+-*DM_REQ_DESC=Target (flat file)  with packed decimal data
+-*-----------------------------------------------------------------------------*
+-* Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+-*-----------------------------------------------------------------------------*
+-:START_PRC
+SET PANEL=9999
+SET NWTIMESTAMP=ON
+SET MORE=OFF
+SET 2PARTNAME=ON
+-RUN
+-*[Variables to Control Request]
+-SET &&CM__TARGET = 'dmhrinp';
+-SET &&CM__AUTHOR = 'dm';
+-SET &&CM__REQUEST = 'dmseq';
+-SET &&CM__RETURN = 0;
+-SET &&CM__FOCCPU = &FOCCPU.EVAL;
+-SET &DISP_JOB = PTHDAT (5, 'dmseq','A5');
+-DEFAULT &DBMSERROR = 10000000
+-DEFAULT &STARTAT = 0
+-DEFAULT &STOPAT  = 1000000000
+-TYPE  (ICM18122) Request - dmseq (Owner: ck01546) submitted.
+-GOTO :DEP_MAIN;
+-:DEP_MAIN
+-TYPE  (ICM18742) dmhrinp type Flat File Existing target
+SET CASESTAT=EXTENDED
+SQL SET UPCASE=OFF; END
+-TYPE  (ICM18429) Issuing PREPARE
+SQL PREPARE SQLIN FROM
+SELECT
+   T1.ID_NUM ,  --Employee Indentification Number
+   T1.LNAME ,  --Employeee Last Name
+   T1.FNAME ,  --Employee First Name
+   T1.PAYSCALE  --Pay Level
+FROM
+   dmhr T1
+END
+-RUN
+-SET &&CM__RETURN = IF &FOCERRNUM EQ 14104 THEN 0 ELSE &FOCERRNUM;
+-IF (&&CM__RETURN NE 0) GOTO :ENDJOB;
+-IF (&SQLAPT EQ 'APT') GOTO :SKIPHOLD;
+-TYPE  (ICM18440) Request will process data via NON-Pass Through (NON-APT)
+-TYPE  (ICM18451) HOLD file will be created for output file named: SQLIN.
+SQL EXECUTE SQLIN;
+TABLE ON TABLE HOLD AS
+SQLIN
+ FORMAT INTERNAL
+IF RECORDLIMIT EQ &STOPAT
+END
+-RUN
+-SET &&CM__RETURN = &FOCERRNUM;
+-IF (&&CM__RETURN NE 0) GOTO :ENDJOB;
+-:SKIPHOLD
+-TYPE  (ICM18743) Starting Load
+MODIFY FILE dmhrinp
+ FIXFORM FROM SQLIN ALIAS PROPAGATE
+ GOTO MATCHIT1
+ CASE MATCHIT1
+  COMPUTE
+   ID/P7=E01;
+   SCALE/P3=E04;
+   LNAME/A14=E02;
+   FNAME/A12=E03;
+  MATCH ID
+   ON MATCH REJECT
+   ON NOMATCH INCLUDE
+  GOTO TOP
+ ENDCASE
+ CASE AT START
+  START &STARTAT
+  STOP  &STOPAT
+  STOP  DBMSERRORS &DBMSERROR
+  LOG DBMSERR MSG OFF
+  LOG DUPL    MSG OFF
+  LOG INVALID MSG OFF
+  LOG NOMATCH MSG OFF
+  LOG FORMAT  MSG OFF
+  LOG ACCEPT  MSG OFF
+  LOG TRANS   MSG OFF
+  TYPE " (ICM18682) Check set to : 1000"
+  CHECK 1000
+ ENDCASE
+ DATA VIA SQLGET
+END
+-RUN
+-TYPE  (ICM18744) Ending Load
+-SET &&CM__RETURN = &FOCERRNUM;
+-:ENDJOB
+-TYPE  (ICM18040) Return Code = &&CM__RETURN
+SET CASESTAT=OFF
+SQL SET UPCASE=ON; END
+SET EMGSRV=OFF
+SQL PURGE SQLIN;
+END
+-RUN
+FI SQLIN CLEAR
+SET EMGSRV=ON
+-TYPE  (ICM18076) Request: dmseq - finished processing
+-SET &&CM__FOCCPU = &FOCCPU.EVAL - &&CM__FOCCPU;
+-TYPE  (ICM18007) CPU Time : &&CM__FOCCPU
+-*[Main Condition]
+-*[Main End]
+-*[Dependence]
+-:ENDDEP
+SET PANEL=0
+SET NWTIMESTAMP=OFF
+SET MORE=ON
+SET 2PARTNAME=OFF
+-RUN

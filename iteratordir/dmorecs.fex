@@ -1,0 +1,127 @@
+-*DM_JOB_TYPE=1
+-*DM_USERID=dm
+-*DM_REQ_DESC=Rectype type used to create one file with two record types
+-*FEX_DESCRIPTION=
+-*---------------------------------------------------------------------
+-* Copyright (c) Information Builders, Inc.  All rights reserved.
+-*
+-* _Name_        ===> dm/general/app/dmorecs.focexec
+-*
+-* _History_:
+-*  Date  Time Who Proj       Project Title
+-* ====== ==== === ====== =============================================
+-* 140513 1650 tms 155612 Refactor ETL Tutorials
+-* 140513 1616 tms 155612 Refactor ETL Tutorials
+-*
+-* END %&$
+-*---------------------------------------------------------------------
+-:START_PRC
+SET PANEL=9999
+SET MORE=OFF
+SET 2PARTNAME=ON
+-RUN
+-*[Variables to Control Request]
+-SET &&CM__TARGET = 'dmorecs';
+-SET &&CM__AUTHOR = 'dm';
+-SET &&CM__REQUEST = '&FOCFEXNAME.EVAL';
+-SET &&CM__RETURN = 0;
+-SET &&CM__FOCCPU = &FOCCPU.EVAL;
+-DEFAULT &DBMSERROR = 10000000
+-DEFAULT &STARTAT = 0
+-DEFAULT &STOPAT  = 1000000000
+-TYPE  (ICM18122) Request - &FOCFEXNAME (Owner: dm) submitted.
+-GOTO :DEP_MAIN;
+-:DEP_MAIN
+-TYPE  (ICM18742) dmorecs type Flat File Existing target
+SET CASESTAT=EXTENDED
+SQL SET UPCASE=OFF; END
+-TYPE  (ICM18429) Issuing PREPARE
+SQL PREPARE SQLIN FROM
+SELECT
+   T1.ORDER_NUM , --Order Number
+   T1.ORDER_DATE , --Date of Order
+   T1.STORE_CODE , --Company ID
+   T1.PLANT , --Location Of Manufacturing Plant
+   T1.PROD_NUM , --Product Number
+   T1.QUANTITY , --Quantity
+   T1.LINEPRICE  --Line Total
+FROM
+   dmord T1
+END
+-RUN
+-SET &&CM__RETURN = IF &FOCERRNUM EQ 14104 THEN 0 ELSE &FOCERRNUM;
+-IF (&&CM__RETURN NE 0) GOTO :ENDJOB;
+-IF (&SQLAPT EQ 'APT') GOTO :SKIPHOLD;
+-TYPE  (ICM18440) Request will process data via NON-Pass Through (NON-APT)
+-TYPE  (ICM18451) HOLD file will be created for output file named: SQLIN.
+SQL EXECUTE SQLIN;
+TABLE ON TABLE HOLD AS
+SQLIN
+ FORMAT INTERNAL
+IF RECORDLIMIT EQ &STOPAT
+END
+-RUN
+-SET &&CM__RETURN = IF &LINES EQ 0 THEN 18708 ELSE &FOCERRNUM;
+-IF (&&CM__RETURN NE 0) GOTO :ENDJOB;
+-:SKIPHOLD
+CREATE FILE dmorecs DROP
+-RUN
+-TYPE  (ICM18743) Starting Load
+MODIFY FILE dmorecs
+ FIXFORM FROM SQLIN ALIAS PROPAGATE
+ GOTO MATCHIT1
+ CASE MATCHIT1
+  COMPUTE
+   LINEPRICE/D12.2=E07;
+   ORDER_NUM/A5=E01;
+   ORDER_DATE/YYMD=E02;
+   STORE_CODE/A6=E03;
+   PLANT/A3=E04;
+   PROD_NUM/A4=E05;
+   QUANTITY/I8C=E06;
+  MATCH ORDER_NUM
+   ON NOMATCH INCLUDE
+   ON MATCH CONTINUE
+  MATCH PROD_NUM
+   ON MATCH INCLUDE
+   ON NOMATCH INCLUDE
+  GOTO TOP
+ ENDCASE
+ CASE AT START
+  START &STARTAT
+  STOP  &STOPAT
+  STOP  DBMSERRORS &DBMSERROR
+  LOG DBMSERR MSG OFF
+  LOG DUPL    MSG OFF
+  LOG INVALID MSG OFF
+  LOG NOMATCH MSG OFF
+  LOG FORMAT  MSG OFF
+  LOG ACCEPT  MSG OFF
+  LOG TRANS   MSG OFF
+ ENDCASE
+ DATA VIA SQLGET
+END
+-RUN
+-TYPE  (ICM18744) Ending Load
+-SET &&CM__RETURN = IF &TRANS EQ 0 THEN 18708 ELSE &FOCERRNUM;
+-:ENDJOB
+-TYPE  (ICM18040) Return Code = &&CM__RETURN
+SET CASESTAT=OFF
+SQL SET UPCASE=ON; END
+SET EMGSRV=OFF
+SQL PURGE SQLIN;
+END
+-RUN
+FI SQLIN CLEAR
+SET EMGSRV=ON
+-TYPE  (ICM18076) Request: &FOCFEXNAME - finished processing
+-SET &&CM__FOCCPU = &FOCCPU.EVAL - &&CM__FOCCPU;
+-TYPE  (ICM18007) CPU Time : &&CM__FOCCPU
+-*[Main Condition]
+-*[Main End]
+-*[Dependence]
+-:ENDDEP
+SET PANEL=0
+SET MORE=ON
+SET 2PARTNAME=OFF
+-RUN

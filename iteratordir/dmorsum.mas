@@ -1,0 +1,14 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=DMORSUM, SUFFIX=SQLMSS  , TRANS_FILE=_EDAHOME/NLS/dt,
+ REMARKS='All orders summary table', $
+ VARIABLE NAME=&&TTABLE,  $
+ VARIABLE NAME=&&TCON,  $
+  SEGMENT=DMORSUM, SEGTYPE=S0, $
+    FIELDNAME=ORDER_NUM, ALIAS=ORDER_NUM, USAGE=A5, ACTUAL=A5,
+      TITLE='Order,Number', DESCRIPTION='Order Number', $
+    FIELDNAME=ORDER_DATE, ALIAS=ORDER_DATE, USAGE=YYMD, ACTUAL=DATE,
+      TITLE='Date of,Order', DESCRIPTION='Date of Order', $
+    FIELDNAME=PLANT, ALIAS=PLANT, USAGE=A3, ACTUAL=A3,
+      TITLE='Plant,Location', DESCRIPTION='Location Of Manufacturing Plant', $
+    FIELDNAME=STORE_CODE, ALIAS=STORE_CODE, USAGE=A6, ACTUAL=A6,
+      TITLE='Company,ID', DESCRIPTION='Company ID', $

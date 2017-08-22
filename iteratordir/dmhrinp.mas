@@ -1,0 +1,13 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=DMHRINP, SUFFIX=FIX     , TRANS_FILE=_EDAHOME/NLS/dt,
+ DATASET=baseapp/dmhrinp.ftm,
+ REMARKS='Sample Target - HR Input', $
+  SEGMENT=DMHRINP, SEGTYPE=S0, $
+    FIELDNAME=ID, ALIAS=ID, USAGE=P7, ACTUAL=P03,
+      TITLE='Employee,ID', DESCRIPTION='Employee Identification Number', $
+    FIELDNAME=SCALE, ALIAS=SCALE, USAGE=P3, ACTUAL=P01,
+      TITLE='Pay,Level', DESCRIPTION='Pay Level', $
+    FIELDNAME=LNAME, ALIAS=LNAME, USAGE=A14, ACTUAL=A14,
+      TITLE='Last,Name', DESCRIPTION='Employee Last Name', $
+    FIELDNAME=FNAME, ALIAS=FNAME, USAGE=A12, ACTUAL=A12,
+      TITLE='First,Name', DESCRIPTION='Employee First Name', $

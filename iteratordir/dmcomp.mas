@@ -1,0 +1,23 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=dmcomp, SUFFIX=SQLORA  , TRANS_FILE=_EDAHOME/NLS/dt,
+ REMARKS='Sample - Stores', $
+  SEGMENT=COMPINFO, SEGTYPE=S0, $
+    FIELDNAME=STORE_CODE, ALIAS=SNUM, USAGE=A6, ACTUAL=A6,
+      TITLE='Store ID', DESCRIPTION='Store ID', $
+    FIELDNAME=STORENAME, ALIAS=SNAME, USAGE=A20V, ACTUAL=A20V,
+      TITLE='Store Name', DESCRIPTION='Store Name', $
+    FIELDNAME=STATE, ALIAS=STATE, USAGE=A2, ACTUAL=A2,
+      TITLE='State', DESCRIPTION='State', $
+    DEFINE REGION/A5V=DECODE STATE ('AL' 'SOUTH' 'AK' 'WEST' 'AR' 'SOUTH'            
+'AZ' 'WEST' 'CA' 'WEST' 'CO' 'WEST' 'CT' 'EAST'                                 
+'DE' 'EAST' 'DC' 'EAST' 'FL' 'SOUTH' 'GA' 'SOUTH' 'HI' 'WEST'                   
+'ID' 'WEST' 'IL' 'NORTH' 'IN' 'NORTH' 'IA' 'NORTH'                              
+'KS' 'NORTH' 'KY' 'SOUTH' 'LA' 'SOUTH' 'ME' 'EAST' 'MD' 'EAST'                  
+'MA' 'EAST' 'MI' 'NORTH' 'MN' 'NORTH' 'MS' 'SOUTH' 'MT' 'WEST'                  
+'MO' 'SOUTH' 'NE' 'WEST'  'NV' 'WEST' 'NH' 'EAST' 'NJ' 'EAST'                   
+'NM' 'WEST' 'NY' 'EAST' 'NC' 'SOUTH' 'ND' 'NORTH' 'OH' 'NORTH'                  
+'OK' 'SOUTH' 'OR' 'WEST' 'PA' 'EAST' 'RI' 'EAST' 'SC' 'SOUTH'                   
+'SD' 'NORTH' 'TN' 'SOUTH' 'TX' 'SOUTH' 'UT' 'WEST' 'VT' 'EAST'                  
+'VA' 'SOUTH' 'WA' 'WEST' 'WV' 'SOUTH' 'WI' 'NORTH' 'WY' 'WEST'                  
+'NA' 'NORTH' 'ON' 'NORTH' ELSE ' ');
+      TITLE='Region', DESCRIPTION='Region', $

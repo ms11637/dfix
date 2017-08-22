@@ -1,0 +1,5 @@
+SEGNAME=AB_CAR_DFIX1, 
+  DELIMITER=',', 
+  HEADER=YES, 
+  CDN=OFF, 
+  CONNECTION=<local>, $

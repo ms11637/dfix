@@ -1,0 +1,34 @@
+$-----------------------------------------------------------------------------$
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+$-----------------------------------------------------------------------------$
+FILENAME=dmstarterm, SUFFIX=FIX     , TRANS_FILE=_EDAHOME/NLS/dt,
+ DATASET=dfix/iteratordir/dmrecs.ftm,
+ REMARKS='DataMigrator: dmstarterm Metadata', $
+  SEGMENT=DUMMY, SEGTYPE=S0, $
+    FIELDNAME=DUMMY, USAGE=A1, ACTUAL=A1, $
+  SEGMENT=DMSTART, SEGTYPE=S0, PARENT=DUMMY,
+    DESCRIPTION='Employee Start records', $
+    FIELDNAME=RECTYPE, ALIAS=S, USAGE=A1, ACTUAL=A1, ACCESS_PROPERTY=(INTERNAL),
+      TITLE='Record,Type', DESCRIPTION='Record Type', $
+    FIELDNAME=ID_NUM, ALIAS=ID_NUM, USAGE=I4, ACTUAL=A04,
+      TITLE='Employee,ID', DESCRIPTION='Employee Identification Number', $
+    FIELDNAME=START_DATE, ALIAS=START_DATE, USAGE=A8YYMD, ACTUAL=A8YYMD,
+      TITLE='Starting,Date', DESCRIPTION='Starting Date', $
+    FIELDNAME=STATUS, ALIAS=STATUS, USAGE=A10, ACTUAL=A10,
+      TITLE='Current,Status', DESCRIPTION='Current Status', $
+    FIELDNAME=POSITION, ALIAS=POSITION, USAGE=A2, ACTUAL=A02,
+      TITLE='Position', DESCRIPTION='Position', $
+    FIELDNAME=PAYSCALE, ALIAS=PAYSCALE, USAGE=I2, ACTUAL=A02,
+      TITLE='Pay,Level', DESCRIPTION='Pay Level', $
+  SEGMENT=DMTERM, SEGTYPE=S0, PARENT=DUMMY,
+    DESCRIPTION='Employee Termination records', $
+    FIELDNAME=RECTYPE, ALIAS=T, USAGE=A1, ACTUAL=A1, ACCESS_PROPERTY=(INTERNAL),
+      TITLE='Termination,Record,Type', DESCRIPTION='Termination Record Type', $
+    FIELDNAME=TERM_ID_NUM, ALIAS=TERM_ID_NUM, USAGE=I4, ACTUAL=A04,
+      TITLE='Termination,Employee,ID', DESCRIPTION='Termination Employee ID', $
+    FIELDNAME=TERM_DATE, ALIAS=TERM_DATE, USAGE=A8YYMD, ACTUAL=A8YYMD,
+      TITLE='Termination,Date', DESCRIPTION='Termination Date', $
+    FIELDNAME=TERM_STATUS, ALIAS=TERM_STATUS, USAGE=A10, ACTUAL=A10,
+      TITLE='Termination,Status', DESCRIPTION='Termination Status', $
+    FIELDNAME=SEVERANCE, ALIAS=SEVERANCE, USAGE=I10, ACTUAL=A10,
+      TITLE='Severance', DESCRIPTION='Severance', $

@@ -1,0 +1,12 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=dmtermd, SUFFIX=SQLORA  , TRANS_FILE=_EDAHOME/NLS/dt,
+ REMARKS='Sample Target - Employee Termination records', $
+  SEGMENT=DMTERM, SEGTYPE=S0, $
+    FIELDNAME=ID_NUM, ALIAS=ID_NUM, USAGE=I6, ACTUAL=I2,
+      TITLE='Termination,Employee,ID', DESCRIPTION='Termination Employee ID', $
+    FIELDNAME=TERM_DATE, ALIAS=TERM_DATE, USAGE=YYMD, ACTUAL=DATE,
+      TITLE='Termination,Date', DESCRIPTION='Termination Date', $
+    FIELDNAME=STATUS, ALIAS=STATUS, USAGE=A10, ACTUAL=A10,
+      TITLE='Termination,Status', DESCRIPTION='Termination Status', $
+    FIELDNAME=SEVERANCE, ALIAS=SEVERANCE, USAGE=I11, ACTUAL=I4,
+      TITLE='Severance', DESCRIPTION='Severance', $

@@ -1,0 +1,10 @@
+[Version Information]
+Flow Version = 1
+[DataFlow SourceTargetView]
+DataFlowChildWindow(Select Columns) = 0,250,200,302,252,272,196
+DataFlowChildWindow(Target_dminvd) = 0,400,252,452,304,272,196
+DataFlowChildWindow(Target_dminva) = 0,400,100,452,152,272,196
+DataFlowChildWindow(Source_dminv:T1) = 0,71,200,123,252,272,196
+[Dependency View]
+Coord(Item,START_PRC) = 120,30
+Coord(Item,DEP_MAIN) = 240,30

@@ -1,0 +1,8 @@
+$-------------------------------------------------------------------------------$
+$ Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@ $
+$-------------------------------------------------------------------------------$
+
+SEGNAME=SEG1, DATA_ORIGIN=&&FL_DATA_ORIGIN, DIRECTORY=&&FL_DIRECTORY, 
+  NAME=&&FL_NAME, EXTENSION=&&FL_EXTENSION, PICKUP=&&FL_PICKUP, 
+  DISCARD=&&FL_DISCARD, POLLING=&&FL_POLLING, TIMEOUT=&&FL_TIMEOUT,
+  START=&&FL_START, CHKPT_FILE=&&FL_CHKPT_FILE, $

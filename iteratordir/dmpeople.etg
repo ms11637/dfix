@@ -1,0 +1,12 @@
+[Version Information]
+Flow Version = 1
+[DataFlow SourceTargetView]
+JoinCaption(1) = 1
+DataFlowChildWindow(Select Columns) = 0,605,159,653,207,272,196
+DataFlowChildWindow(Target_dmpeeps:1) = 0,753,160,801,208,272,196
+DataFlowChildWindow(Source_DMSALE:T1) = 0,307,84,355,132,272,196
+DataFlowChildWindow(Join_1) = 0,452,155,500,203,272,196
+DataFlowChildWindow(Source_DMHR:T2) = 0,302,242,350,290,272,196
+[Dependency View]
+Coord(Item,START_PRC) = 120,30
+Coord(Item,DEP_MAIN) = 240,30

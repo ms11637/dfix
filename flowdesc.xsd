@@ -1,0 +1,2938 @@
+<?xml version="1.0"?>
+
+
+
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+
+	<!-- **** simple elements ****  -->
+
+
+
+	<xs:element name="APPDIR" type="APPDIRType" />
+
+
+
+	<!-- for REQ segment -->
+
+
+
+
+
+
+
+	<xs:simpleType name="REQ_NAME">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="AUTHOR">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="20" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DESCR">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="78" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="MIGR_RELEASE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="20" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="MIGR_GENNUM">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="10" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="MIGR_BLD">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="10" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="MODIF_DT">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="11" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="MODIF_TM">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="21" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="EMAIL_TO">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="50" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="JOB_TYPE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="36" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="JOB_TYPN">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="BLK_LOAD_TYPE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="BLK_LOAD_TYPN">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SQL_TXT">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="4096" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DBMS_ENGINE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="16" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DBMS_CONN">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="16" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="STOP_AFT_ERR">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="STOP_NO_ROWS">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="1" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="PARSER_ERROR">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="1" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="NUM_ATMPT">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="1" />
+
+
+
+		</xs:restriction>
+
+
+
+
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="PREF_WAK">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="1" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="INVALID_FLOW">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="1" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="INVALID_MSG">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- now for SCHED segment -->
+
+
+
+	<xs:simpleType name="START_DATE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="END_DATE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="EVENT_TYP">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="1" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="CODE_TYP">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="1" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="LAST">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="1" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DAYS_OF_WK">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="7" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="START_HH">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="START_MM">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="FREQ">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="END_HH">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="END_MM">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DAYS_OF_MONTH">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="31" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for LOGGING segment -->
+
+
+
+	<xs:simpleType name="LOG_OPTION">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="LOG_APPDIR">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="512" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="LOG_SYNONYM">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="25" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="LOG_DATASET">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="35" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for SOURCE segment -->
+
+
+
+	<xs:simpleType name="SRC_NAME">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SRC_APPDIR">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="512" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SRC_DESCR">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="78" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SRC_TBL">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SRC_ENGINE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SRC_ADAPTER">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="36" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SRC_CONNECT">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="20" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for SRCTRNSF segment -->
+
+
+
+	<xs:simpleType name="SRC_TRNF_NAME">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SRC_TRNF_EXP">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="255" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="SRC_TRNF_USG">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for TARGET segment -->
+
+
+
+	<xs:simpleType name="TRG_NAME">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_APPDIR">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="512" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_IS_NEW">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_STRATEGY">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_ENGINE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_ADAPTER">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="36" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_CONNECT">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="20" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_TBL">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_DATASET">
+
+
+
+
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_NOMATCH">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="80" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+	
+
+
+
+	<xs:simpleType name="TRG_NOMATCHN">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_LOADOPT">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="80" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_LOADOPTN">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_DROPDB">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="80" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_DROPDBN">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_HOLD_FMT">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="10" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_COMMIT">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="6" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for TRGTRNSF segment -->
+
+
+
+	<xs:simpleType name="TRG_TRNF_NAME">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_TRNF_EXP">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="255" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="TRG_TRNF_USG">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="8" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for PROCFLOW segment -->
+
+
+
+	<xs:simpleType name="DEP_TYPE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="9" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_TYPN">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="5" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for PROCDEP segment -->
+
+
+
+	<xs:simpleType name="DEP_RUN_TYPE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="5" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_RUN_TYPN">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="2" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_ALIAS">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="10" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_REQ">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_REQ_APP">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="512" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_GRP_ID">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="10" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for PROCWAIT segment -->
+
+
+
+	<xs:simpleType name="WAIT_LST">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="128" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="WAIT_INTERVAL">
+
+
+
+		<xs:restriction base="xs:unsignedShort">
+
+
+
+			<xs:totalDigits value="5" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for PROCMAIL segment -->
+
+
+
+	<xs:simpleType name="DEP_EMAIL_TO">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="50" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_EMAIL_SUBJ">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="50" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_EMAIL_MSG">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="255" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_EMAIL_ATTACH">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_EMAIL_FNAME">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="DEP_EMAIL_FTYPE">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="16" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for SETVAR segment -->
+
+
+
+	<xs:simpleType name="DEP_SET_VAR">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="255" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- for BLKPARMS segment -->
+
+
+
+	<xs:simpleType name="BLK_PRPNAME">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="64" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<xs:simpleType name="BLK_PRPVAL">
+
+
+
+		<xs:restriction base="xs:string">
+
+
+
+			<xs:maxLength value="16" />
+
+
+
+		</xs:restriction>
+
+
+
+	</xs:simpleType>
+
+
+
+
+
+
+
+	<!-- ***** definition of complex elements ****** -->
+
+
+
+	<xs:complexType name="APPDIRType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="APPDIR">
+
+
+
+				<xs:simpleType>
+
+
+
+					<xs:restriction base="xs:string">
+
+
+
+						<xs:maxLength value="512" />
+
+
+
+					</xs:restriction>
+
+
+
+				</xs:simpleType>
+
+
+
+			</xs:element>
+
+
+
+			<xs:element name="REQ" type="REQType" maxOccurs="unbounded" />
+
+
+
+		</xs:sequence>
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+	<xs:complexType name="REQType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="REQ_NAME" type="REQ_NAME" />
+
+
+
+			<xs:element name="AUTHOR" type="AUTHOR" />
+
+
+
+			<xs:element name="DESCR" type="DESCR" />
+
+
+
+			<xs:element name="MIGR_RELEASE" type="MIGR_RELEASE" />
+
+
+
+			<xs:element name="MIGR_GENNUM" type="MIGR_GENNUM" />
+
+
+
+			<xs:element name="MIGR_BLD" type="MIGR_BLD" />
+
+
+
+			<xs:element name="MODIF_DT" type="MODIF_DT" />
+
+
+
+			<xs:element name="MODIF_TM" type="MODIF_TM" />
+
+
+
+			<xs:element name="EMAIL_TO" type="EMAIL_TO" />
+
+
+
+			<xs:element name="JOB_TYPE" type="JOB_TYPE" />
+
+
+
+			<xs:element name="JOB_TYPN" type="JOB_TYPN" />
+
+
+
+			<xs:element name="BLK_LOAD_TYPE" type="BLK_LOAD_TYPE" />
+
+
+
+			<xs:element name="BLK_LOAD_TYPN" type="BLK_LOAD_TYPN" />
+
+
+
+			<xs:element name="SQL_TXT" type="SQL_TXT" />
+
+
+
+			<xs:element name="DBMS_ENGINE" type="DBMS_ENGINE" />
+
+
+
+			<xs:element name="DBMS_CONN" type="DBMS_CONN" />
+
+
+
+			<xs:element name="STOP_AFT_ERR" type="STOP_AFT_ERR" />
+
+
+
+			<xs:element name="STOP_NO_ROWS" type="STOP_NO_ROWS" />
+
+
+
+			<xs:element name="PARSER_ERROR" type="PARSER_ERROR" />
+
+
+
+			<xs:element name="NUM_ATMPT" type="NUM_ATMPT" />
+
+
+
+			<xs:element name="PREF_WAK" type="PREF_WAK" />
+
+
+
+			<xs:element name="INVALID_FLOW" type="INVALID_FLOW" />
+
+
+
+			<xs:element name="INVALID_MSG" type="INVALID_MSG" />
+
+
+
+			<xs:element name="SCHED" type="SCHEDType" maxOccurs="unbounded" />
+
+
+
+			<xs:element name="LOGGING" type="LOGGINGType" maxOccurs="unbounded" />
+
+
+
+			<xs:element name="SOURCE" type="SOURCEType" maxOccurs="unbounded" />
+
+
+
+			<xs:element name="TARGET" type="TARGETType" maxOccurs="unbounded" />
+
+
+
+			<xs:element name="PROCFLOW" type="PROCFLOWType" maxOccurs="unbounded" />
+
+
+
+			<xs:element name="BLKPARMS" type="BLKPARMSType" maxOccurs="unbounded" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="reqID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+	<xs:complexType name="SCHEDType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="START_DATE" type="START_DATE" />
+
+
+
+			<xs:element name="END_DATE" type="END_DATE" />
+
+
+
+			<xs:element name="EVENT_TYP" type="EVENT_TYP" />
+
+
+
+			<xs:element name="CODE_TYP" type="CODE_TYP" />
+
+
+
+			<xs:element name="LAST" type="LAST" />
+
+
+
+			<xs:element name="DAYS_OF_WK" type="DAYS_OF_WK" />
+
+
+
+			<xs:element name="START_HH" type="START_HH" />
+
+
+
+			<xs:element name="START_MM" type="START_MM" />
+
+
+
+			<xs:element name="FREQ" type="FREQ" />
+
+
+
+			<xs:element name="END_HH" type="END_HH" />
+
+
+
+			<xs:element name="END_MM" type="END_MM" />
+
+
+
+			<xs:element name="DAYS_OF_MONTH" type="DAYS_OF_MONTH" />
+
+
+
+		</xs:sequence>
+
+
+
+	</xs:complexType>
+
+
+
+	<xs:complexType name="LOGGINGType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="LOG_OPTION" type="LOG_OPTION" />
+
+
+
+			<xs:element name="LOG_APPDIR" type="LOG_APPDIR" />
+
+
+
+			<xs:element name="LOG_SYNONYM" type="LOG_SYNONYM" />
+
+
+
+			<xs:element name="LOG_DATASET" type="LOG_DATASET" />
+
+
+
+		</xs:sequence>
+
+
+
+	</xs:complexType>
+
+
+
+	<xs:complexType name="SOURCEType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="SRC_NAME" type="SRC_NAME" />
+
+
+
+			<xs:element name="SRC_APPDIR" type="SRC_APPDIR" />
+
+
+
+			<xs:element name="SRC_DESCR" type="SRC_DESCR" />
+
+
+
+			<xs:element name="SRC_TBL" type="SRC_TBL" />
+
+
+
+			<xs:element name="SRC_ENGINE" type="SRC_ENGINE" />
+
+
+
+			<xs:element name="SRC_ADAPTER" type="SRC_ADAPTER" />
+
+
+
+			<xs:element name="SRC_CONNECT" type="SRC_CONNECT" />
+
+
+
+			<xs:element name="SRCTRNSF" type="SRCTRNSFType" maxOccurs="unbounded" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="sourceID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+	<xs:complexType name="SRCTRNSFType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="SRC_TRNF_NAME" type="SRC_TRNF_NAME" />
+
+
+
+			<xs:element name="SRC_TRNF_EXP" type="SRC_TRNF_EXP" />
+
+
+
+			<xs:element name="SRC_TRNF_USG" type="SRC_TRNF_USG" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="srctrnID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+	
+
+
+
+	<xs:complexType name="TARGETType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="TRG_NAME" type="TRG_NAME" />
+
+
+
+			<xs:element name="TRG_APPDIR" type="TRG_APPDIR" />
+
+
+
+			<xs:element name="TRG_IS_NEW" type="TRG_IS_NEW" />
+
+
+
+			<xs:element name="TRG_STRATEGY" type="TRG_STRATEGY" />
+
+
+
+			<xs:element name="TRG_ENGINE" type="TRG_ENGINE" />
+
+
+
+			<xs:element name="TRG_ADAPTER" type="TRG_ADAPTER" />
+
+
+
+			<xs:element name="TRG_CONNECT" type="TRG_CONNECT" />
+
+
+
+			<xs:element name="TRG_TBL" type="TRG_TBL" />
+
+
+
+			<xs:element name="TRG_DATASET" type="TRG_DATASET" />
+
+
+
+			<xs:element name="TRG_NOMATCH" type="TRG_NOMATCH" />
+
+
+
+			<xs:element name="TRG_NOMATCHN" type="TRG_NOMATCHN" />
+
+
+
+			<xs:element name="TRG_LOADOPT" type="TRG_LOADOPT" />
+
+
+
+			<xs:element name="TRG_LOADOPTN" type="TRG_LOADOPTN" />
+
+
+
+			<xs:element name="TRG_DROPDB" type="TRG_DROPDB" />
+
+
+
+			<xs:element name="TRG_DROPDBN" type="TRG_DROPDBN" />
+
+
+
+			<xs:element name="TRG_HOLD_FMT" type="TRG_HOLD_FMT" />
+
+
+
+			<xs:element name="TRG_COMMIT" type="TRG_COMMIT" />
+
+
+
+			<xs:element name="TRTRNSF" type="TRTRNSFType" maxOccurs="unbounded" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="targetID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+	<xs:complexType name="TRTRNSFType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="TRG_TRNF_NAME" type="TRG_TRNF_NAME" />
+
+
+
+			<xs:element name="TRG_TRNF_EXP" type="TRG_TRNF_EXP" />
+
+
+
+			<xs:element name="TRG_TRNF_USG" type="TRG_TRNF_USG" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="trgtrnID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+	<xs:complexType name="PROCFLOWType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="DEP_TYPE" type="DEP_TYPE" />
+
+
+
+			<xs:element name="DEP_TYPN" type="DEP_TYPN" />
+
+
+
+			<xs:element name="PROCDEP" type="PROCDEPType" maxOccurs="unbounded" />
+
+
+
+			<xs:element name="PROCWAIT" type="PROCWAITType" maxOccurs="unbounded" />
+
+
+
+			<xs:element name="PROCMAIL" type="PROCMAILType" maxOccurs="unbounded" />
+
+
+
+			<xs:element name="SETVAR" type="SETVARType" maxOccurs="unbounded" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="procflowID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+	<xs:complexType name="PROCDEPType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="DEP_RUN_TYPE" type="DEP_RUN_TYPE" />
+
+
+
+			<xs:element name="DEP_RUN_TYPN" type="DEP_RUN_TYPN" />
+
+
+
+			<xs:element name="DEP_ALIAS" type="DEP_ALIAS" />
+
+
+
+			<xs:element name="DEP_REQ" type="DEP_REQ" />
+
+
+
+			<xs:element name="DEP_REQ_APP" type="DEP_REQ_APP" />
+
+
+
+			<xs:element name="DEP_GRP_ID" type="DEP_GRP_ID" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="procdepID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+	<xs:complexType name="PROCWAITType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="WAIT_LST" type="WAIT_LST" />
+
+
+
+			<xs:element name="WAIT_INTERVAL" type="WAIT_INTERVAL" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="waitID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+	<xs:complexType name="PROCMAILType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="DEP_EMAIL_TO" type="DEP_EMAIL_TO" />
+
+
+
+			<xs:element name="DEP_EMAIL_SUBJ" type="DEP_EMAIL_SUBJ" />
+
+
+
+			<xs:element name="DEP_EMAIL_MSG" type="DEP_EMAIL_MSG" />
+
+
+
+			<xs:element name="DEP_EMAIL_ATTACH" type="DEP_EMAIL_ATTACH" />
+
+
+
+			<xs:element name="DEP_EMAIL_FNAME" type="DEP_EMAIL_FNAME" />
+
+
+
+			<xs:element name="DEP_EMAIL_FTYPE" type="DEP_EMAIL_FTYPE" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="mailID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+	<xs:complexType name="SETVARType">
+
+
+
+		<xs:sequence>
+
+
+
+			<xs:element name="DEP_SET_VAR" type="DEP_SET_VAR" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="setvarID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+	<xs:complexType name="BLKPARMSType">
+
+
+
+		<xs:sequence>
+
+
+
+		<xs:element name="BLK_PRPNAME" type="BLK_PRPNAME" />
+
+
+
+			<xs:element name="BLK_PRPVAL" type="BLK_PRPVAL" />
+
+
+
+		</xs:sequence>
+
+
+
+		<xs:attribute name="blksparmsID" type="xs:ID" />
+
+
+
+	</xs:complexType>
+
+
+
+
+
+
+
+</xs:schema>
+

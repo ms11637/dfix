@@ -1,0 +1,9 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=DMLOCS, SUFFIX=FIX     , TRANS_FILE=_EDAHOME/NLS/dt,
+ DATASET=baseapp/dmlocs.ftm,
+ REMARKS='Sample Target - Plant Locations', $
+  SEGMENT=DMLOCS, SEGTYPE=S0, $
+    FIELDNAME=PLANT_STATE, ALIAS=PLANT_STATE, USAGE=A30, ACTUAL=A30,
+      TITLE='Plant,State', DESCRIPTION='Plant State', $
+    FIELDNAME=PLANT_CITY, ALIAS=PLANT_CITY, USAGE=A20, ACTUAL=A20,
+      TITLE='Plant,City', DESCRIPTION='Plant City', $

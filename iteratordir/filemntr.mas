@@ -1,0 +1,39 @@
+$-------------------------------------------------------------------------------$
+$ Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@ $
+$-------------------------------------------------------------------------------$
+
+FILENAME=MONITOR, SUFFIX=FIX, REMARKS='Sample: file monitor',$
+ VARIABLE NAME=&&FL_DATA_ORIGIN,  PROMPT='Origin of data processed by Adapter',
+    ACCEPT='LISTENER' OR 'FILE', DEFAULT='LISTENER', $
+ VARIABLE NAME=&&FL_DIRECTORY,  PROMPT='Listening Directory', DEFAULT='foccache', $
+ VARIABLE NAME=&&FL_NAME,  PROMPT='Data File Name', DEFAULT='*', $
+ VARIABLE NAME=&&FL_EXTENSION,  PROMPT='Data File Extension', DEFAULT='*', $
+ VARIABLE NAME=&&FL_CONNECTION,  PROMPT='Connection to local or remote data files location', $
+ VARIABLE NAME=&&FL_DISCARD,  PROMPT='Processed Data Files Discard Strategy',
+    ACCEPT='DELETE' OR 'ARCHIVE' OR 'KEEP', DEFAULT='KEEP', $
+ VARIABLE NAME=&&FL_PICKUP,  PROMPT='Data Files Pickup Strategy (IMMEDIATE is not allowed when DISCARD=KEEP)',
+    ACCEPT='IMMEDIATE' OR 'TRIGGER' OR 'MONITOR', DEFAULT='MONITOR', $
+ VARIABLE NAME=&&FL_POLLING,  PROMPT='Interval in seconds to poll', DEFAULT=30, $
+ VARIABLE NAME=&&FL_TIMEOUT,  PROMPT='Interval in seconds to stop processing if no new files', DEFAULT=120, $
+ VARIABLE NAME=&&FL_MAXFILES,  PROMPT='Maximum number of data files processed in the request', $
+ VARIABLE NAME=&&FL_ARCHIVE,  PROMPT='FL Archiving Directory', $
+ VARIABLE NAME=&&FL_TRIGGER,  PROMPT='Trigger File Extension', $
+ VARIABLE NAME=&&FL_START,  PROMPT='Starting point in monitoring directory',
+    ACCEPT='CHKPT' OR 'CUR_DIR', DEFAULT='CHKPT', $
+ VARIABLE NAME=&&FL_CHKPT_FILE,  PROMPT='Checkpoint file location', DEFAULT=' ', $
+  SEGMENT=SEG1, SEGTYPE=S0, $
+    FIELDNAME=DUMMY, ALIAS=DUMMY,      USAGE=A1,  ACTUAL=A1, $
+$-$  GROUP=STATUS, ALIAS=STATUS, ELEMENTS=11,       $
+    FIELDNAME=FILEFNAME,  ALIAS=INSTANCE_FULL, USAGE=A512, ACTUAL=A512, TITLE='Full name', $
+    FIELDNAME=FILESIZE,   ALIAS=INSTANCE_SIZE, USAGE=I11,  ACTUAL=I4,   TITLE='Size', $
+    FIELDNAME=FILEDATE,   ALIAS=INSTANCE_DATE, USAGE=A10,  ACTUAL=A10,  TITLE='Modification date', $
+    FIELDNAME=FILETIME,   ALIAS=INSTANCE_TIME, USAGE=A8,   ACTUAL=A8,   TITLE='Modification time', $
+    FIELDNAME=FILETYPE,   ALIAS=INSTANCE_TYPE, USAGE=A9,   ACTUAL=A9,   TITLE='Object type', $
+    FIELDNAME=FILEACCS,   ALIAS=INSTANCE_ACCS, USAGE=A10,  ACTUAL=A10,  TITLE='Access mode', $
+    FIELDNAME=FILERDWR,   ALIAS=INSTANCE_RDWR, USAGE=A8,   ACTUAL=A8,   TITLE='Write access', $
+    FIELDNAME=FILEUSER,   ALIAS=INSTANCE_USER, USAGE=A100, ACTUAL=A100, TITLE='User', $
+    FIELDNAME=FILEGROUP,  ALIAS=INSTANCE_GROUP,USAGE=A100, ACTUAL=A100, TITLE='Group', $
+    FIELDNAME=FILEEXTN,   ALIAS=INSTANCE_EXTN, USAGE=A64,  ACTUAL=A64,  TITLE='Extention', $
+    FIELDNAME=FILEMONST,  ALIAS=INSTANCE_MONS, USAGE=A12,  ACTUAL=A12,  TITLE='Monitoring status', $
+  DEFINE RUNDATE/YYMD = '&DATEYYMD' ;$
+  DEFINE RUNTIME/A8 = '&TOD' ;$

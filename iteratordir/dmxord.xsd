@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="NewSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="PROD_INFO">
+
+    <xs:sequence>
+
+      <xs:element name="PROD_NUM">
+
+        <xs:simpleType>
+
+          <xs:restriction base="xs:string">
+
+            <xs:length value="4"/>
+
+          </xs:restriction>
+
+        </xs:simpleType>
+
+      </xs:element>
+
+      <xs:element name="QUANTITY">
+
+        <xs:simpleType>
+
+          <xs:restriction base="xs:integer">
+
+            <xs:totalDigits value="4"/>
+
+          </xs:restriction>
+
+        </xs:simpleType>
+
+      </xs:element>
+
+      <xs:element name="LINEPRICE">
+
+        <xs:simpleType>
+
+          <xs:restriction base="xs:decimal">
+
+            <xs:totalDigits value="10"/>
+
+            <xs:fractionDigits value="2"/>
+
+          </xs:restriction>
+
+        </xs:simpleType>
+
+      </xs:element>
+
+    </xs:sequence>
+
+  </xs:complexType>
+
+  <xs:complexType name="ORDER_INFO">
+
+    <xs:sequence>
+
+      <xs:element name="ORDER_NUM">
+
+        <xs:simpleType>
+
+          <xs:restriction base="xs:integer">
+
+            <xs:totalDigits value="5"/>
+
+          </xs:restriction>
+
+        </xs:simpleType>
+
+      </xs:element>
+
+      <xs:element name="ORDER_DATE" type="xs:date"/>
+
+      <xs:element name="STORE_CODE">
+
+        <xs:simpleType>
+
+          <xs:restriction base="xs:string">
+
+            <xs:maxLength value="6"/>
+
+          </xs:restriction>
+
+        </xs:simpleType>
+
+      </xs:element>
+
+      <xs:element name="PLANT">
+
+        <xs:simpleType>
+
+          <xs:restriction base="xs:string">
+
+            <xs:maxLength value="3"/>
+
+          </xs:restriction>
+
+        </xs:simpleType>
+
+      </xs:element>
+
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PROD_INFO" type="PROD_INFO"/>
+
+    </xs:sequence>
+
+  </xs:complexType>
+
+  <xs:element name="ORDER">
+
+    <xs:complexType>
+
+      <xs:sequence>
+
+        <xs:element name="ORDER_INFO" type="ORDER_INFO" maxOccurs="unbounded"/>
+
+      </xs:sequence>
+
+    </xs:complexType>
+
+  </xs:element>
+
+</xs:schema>
+

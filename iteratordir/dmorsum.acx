@@ -1,0 +1,3 @@
+ SEGNAME=DMORSUM, 
+   TABLENAME=dmorsum, 
+   CONNECTION=CON01, $

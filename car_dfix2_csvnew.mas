@@ -1,0 +1,24 @@
+FILENAME=car_dfix2_csvnew, SUFFIX=DFIX    ,                                     
+ DATASET=dfix/car_dfix2_csvnew.csv, $                                           
+  SEGMENT=CAR_DFIX2_CSVNEW, SEGTYPE=S0, $                                       
+    FIELDNAME=COUNTRY, ALIAS=COUNTRY, USAGE=A10, ACTUAL=A10, FIELDTYPE=I, $     
+    FIELDNAME=CAR, ALIAS=CAR, USAGE=A16, ACTUAL=A16, $                          
+    FIELDNAME=MODEL, ALIAS=MODEL, USAGE=A24, ACTUAL=A24,                        
+      MISSING=ON, $                                                             
+    FIELDNAME=BODYTYPE, ALIAS=BODYTYPE, USAGE=A12, ACTUAL=A12, $                
+    FIELDNAME=SEATS, ALIAS=SEATS, USAGE=I3, ACTUAL=A3, $                        
+    FIELDNAME=DEALER_COST, ALIAS=DEALER_COST, USAGE=D7, ACTUAL=A7, $            
+    FIELDNAME=RETAIL_COST, ALIAS=RETAIL_COST, USAGE=D7, ACTUAL=A7, $            
+    FIELDNAME=SALES, ALIAS=SALES, USAGE=I6, ACTUAL=A6, $                        
+    FIELDNAME=LENGTH, ALIAS=LENGTH, USAGE=D5, ACTUAL=A5, $                      
+    FIELDNAME=WIDTH, ALIAS=WIDTH, USAGE=D5, ACTUAL=A5, $                        
+    FIELDNAME=HEIGHT, ALIAS=HEIGHT, USAGE=D5, ACTUAL=A5, $                      
+    FIELDNAME=WEIGHT, ALIAS=WEIGHT, USAGE=D6, ACTUAL=A6, $                      
+    FIELDNAME=WHEELBASE, ALIAS=WHEELBASE, USAGE=D6.1, ACTUAL=A6, $              
+    FIELDNAME=FUEL_CAP, ALIAS=FUEL_CAP, USAGE=D6.1, ACTUAL=A6, $                
+    FIELDNAME=BHP, ALIAS=BHP, USAGE=D6, ACTUAL=A6, $                            
+    FIELDNAME=RPM, ALIAS=RPM, USAGE=I5, ACTUAL=A5, $                            
+    FIELDNAME=MPG, ALIAS=MPG, USAGE=D6, ACTUAL=A6, $                            
+    FIELDNAME=ACCEL, ALIAS=ACCEL, USAGE=D6, ACTUAL=A6, $                        
+    FIELDNAME=WARRANTY, ALIAS=WARRANTY, USAGE=A40, ACTUAL=A40, $                
+    FIELDNAME=STANDARD, ALIAS=STANDARD, USAGE=A40, ACTUAL=A40, $                

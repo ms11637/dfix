@@ -1,0 +1,240 @@
+-*DM_JOB_TYPE=13
+-*DM_USERID=dm
+-*DM_REQ_DESC=Target (XML) described by dmxord.xsd
+-*DM_REQ_COMMENT=Create Synonym for dmxord.xml before opening this flow.
+-*-----------------------------------------------------------------------------*
+-* Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+-*-----------------------------------------------------------------------------*
+-:START_PRC
+SET PANEL=9999
+SET MORE=OFF
+SET 2PARTNAME=ON
+-RUN
+-*[Variables to Control Request]
+-SET &&CM__TARGET = 'dmxord';
+-SET &&CM__AUTHOR = 'dm';
+-SET &&CM__REQUEST = '&FOCFEXNAME.EVAL';
+-SET &&CM__RETURN = 0;
+-SET &&CM__FOCCPU = &FOCCPU.EVAL;
+-DEFAULT &DBMSERROR = 10000000
+-DEFAULT &STARTAT = 0
+-DEFAULT &STOPAT  = 1000000000
+-TYPE  (ICM18122) Request - &FOCFEXNAME (Owner: dm) submitted.
+-GOTO :DEP_MAIN;
+-:DEP_MAIN
+-TYPE  (ICM18742) dfix/iteratordir/dmxord type XML Existing target
+CREATE FILE dfix/iteratordir.dmxord DROP
+-RUN
+-TYPE  (ICM18743) Starting Load
+MODIFY FILE dfix/iteratordir/dmxord
+ COMPUTE
+  __$SEG_N/I3=;
+-* Hi load advanced model control variables:
+-* __SEG_N - source segment #;
+-* _$IPi - current level of the last in a source path segment
+-* _$OTj - trigger (1/0) for the  target path's update
+-* _$OPj - current level of the last in a target path updatable segment
+-* _$OPjN - is _$OPj, after the last target's update
+-* _$TRG_UPD - flag, set when target is updated
+-* Names: PnLm - path n, level m
+-* To get flow w/console log traces, set env. var. devenv=8 [-all, 2-src., 4-trg.]
+ COMPUTE _$IP1/I2=;
+ COMPUTE _$OT1/I1=;
+ COMPUTE _$OP1/I2=;
+ COMPUTE _$OP1N/I2=;
+ COMPUTE _$STS2/I8=;_$STS3/I8=;
+ COMPUTE _$TRG_UPD/I1=;_$V/I1=;
+ FIXFORM __$SEG_N/A3
+ IF __$SEG_N EQ 0 THEN PERFORM UPDATE_SEG0:;
+ GOTO INPUT:
+ CASE INPUT:
+  FIXFORM FROM dfix/iteratordir/DMORD ALIAS PROPAGATE
+  IF __$SEG_N EQ 1 THEN GOTO INPS1:;
+  IF __$SEG_N EQ 2 THEN GOTO INPS2:;
+  IF __$SEG_N LE 2 THEN GOTO TOP;
+  TYPE "Unknown Input Segment Index: <__$SEG_N"
+  GOTO TOP
+ ENDCASE
+-* set _$OPj, preserve higher level
+ CASE SET_OP1:
+  IF _$OP1 GE _$V THEN GOTO ENDCASE;
+  COMPUTE _$OP1=_$V;
+ ENDCASE
+-* set _$OPjN, not to exceed current _$OPj
+ CASE SET_OP1N:
+  IF _$OP1N LE _$V THEN GOTO ENDCASE;
+  COMPUTE _$OP1N=_$V;
+ ENDCASE
+-* process src. segment..Call target's update if current _$IP >= then previous.
+ CASE INPS1:
+  COMPUTE _$OT1=1;
+  IF _$IP1 GE 1 THEN PERFORM UPDATE_TRG:;
+  IF _$TRG_UPD GT 0 THEN PERFORM INPS1_OP: ELSE PERFORM INPS1_OPV:;
+  PERFORM INPS1_OPNV:
+  COMPUTE _$IP1=1;
+  COMPUTE _$OT1=0;
+  PERFORM CLN_S1:
+  COMPUTE
+   _$S1F1/A5=ONUM;
+   _$S1F2/YYMD=ODATE;
+   _$S1F3/A6=SNUM;
+   _$S1F4/A3=PLNT;
+  GOTO TOP
+ ENDCASE
+ CASE INPS1_OP:
+  COMPUTE _$TRG_UPD=0;_$OP1=2;
+ ENDCASE
+ CASE INPS1_OPV:
+  COMPUTE _$V=2;
+  PERFORM SET_OP1:
+ ENDCASE
+ CASE INPS1_OPNV:
+-* set to the path's current lvl - 1
+  COMPUTE _$V=1;
+  PERFORM SET_OP1N:
+ ENDCASE
+ CASE INPS2:
+  COMPUTE _$OT1=1;
+  IF _$IP1 GE 2 THEN PERFORM UPDATE_TRG:;
+  IF _$TRG_UPD GT 0 THEN PERFORM INPS2_OP: ELSE PERFORM INPS2_OPV:;
+  PERFORM INPS2_OPNV:
+  COMPUTE _$IP1=2;
+  COMPUTE _$OT1=0;
+  COMPUTE
+   _$S1F5/A4=PNUM;
+   _$S1F6/I8C=QTY;
+   _$S1F7/D12.2MC=LINETOTAL;
+  GOTO TOP
+ ENDCASE
+ CASE INPS2_OP:
+  COMPUTE _$TRG_UPD=0;_$OP1=3;
+ ENDCASE
+ CASE INPS2_OPV:
+  COMPUTE _$V=3;
+  PERFORM SET_OP1:
+ ENDCASE
+ CASE INPS2_OPNV:
+  COMPUTE _$V=2;
+  PERFORM SET_OP1N:
+ ENDCASE
+-* target update, start on 1-st level for each path
+ CASE UPDATE_TRG:
+ COMPUTE _$TRG_UPD=1;
+  IF _$OT1 GT 0 AND _$OP1N LT _$OP1 THEN PERFORM UPD_P1L1:;
+ ENDCASE
+-* called on end of source data
+ CASE UPDATE_SEG0:
+  COMPUTE _$OT1=1;
+  PERFORM UPDATE_TRG:
+  COMPUTE _$OT1=0;
+  COMPUTE _$IP1=0;
+  PERFORM CLN_S1:
+  PERFORM SHOW_STATS:
+ ENDCASE
+-* process target segment(n) update...
+ CASE UPD_P1L1:
+  IF _$OP1 LT 1 THEN GOTO ENDCASE;
+  IF _$OP1N GE 1 THEN GOTO UPD_P1L2:;
+  PERFORM UPD_SEG1:
+  COMPUTE _$OP1N=1;
+  GOTO UPD_P1L2:
+ ENDCASE
+ CASE UPD_P1L2:
+  IF _$OP1 LT 2 THEN GOTO ENDCASE;
+  IF _$OP1N GE 2 THEN GOTO UPD_P1L3:;
+  PERFORM UPD_SEG2:
+  COMPUTE _$OP1N=2;
+  GOTO UPD_P1L3:
+ ENDCASE
+ CASE UPD_P1L3:
+  IF _$OP1 LT 3 THEN GOTO ENDCASE;
+  PERFORM UPD_SEG3:
+  COMPUTE _$OP1N=3;
+ ENDCASE
+-* match cases...
+ CASE UPD_SEG1:
+ ENDCASE
+ CASE UPD_SEG2:
+  COMPUTE
+   ORDER_NUM=EDIT(_$S1F1);
+   ORDER_DATE=_$S1F2;
+   STORE_CODE=_$S1F3;
+   PLANT=_$S1F4;
+  COMPUTE _$STS2=_$STS2+1;
+  MATCH ORDER_NUM ORDER_DATE STORE_CODE PLANT
+   ON MATCH CONTINUE
+   ON NOMATCH INCLUDE
+ ENDCASE
+ CASE UPD_SEG3:
+  COMPUTE
+   PROD_NUM=_$S1F5;
+   QUANTITY=_$S1F6;
+   LINEPRICE=_$S1F7;
+  COMPUTE _$STS3=_$STS3+1;
+  MATCH PROD_NUM QUANTITY LINEPRICE
+   ON MATCH INCLUDE
+   ON NOMATCH INCLUDE
+ ENDCASE
+-* clear _$SiFj, and call cleanup for children segm
+ CASE CLN_S1:
+  PERFORM CLN_S2:
+ ENDCASE
+ CASE CLN_S2:
+  COMPUTE
+   _$S1F5/A4=;
+   _$S1F6/I8C=;
+   _$S1F7/D12.2MC=;
+ ENDCASE
+ CASE SHOW_STATS:
+  TYPE "Statistics: performed MATCH, by segments:"
+  TYPE "---------------------------------------------------"
+  TYPE "  2. ORDER_INFO       <_$STS2"
+  TYPE "  3. PROD_INFO        <_$STS3"
+ ENDCASE
+-* this case is for DMC parser only
+ CASE MATCHIT1
+  COMPUTE
+   ORDER_NUM/P6=EDIT(ONUM);
+   ORDER_DATE/YY-M-D=ODATE;
+   STORE_CODE/A6=SNUM;
+   PLANT/A3=PLNT;
+   PROD_NUM/A4=PNUM;
+   QUANTITY/P5=QTY;
+   LINEPRICE/P12.2=LINETOTAL;
+  MATCH *
+   ON MATCH INCLUDE
+   ON NOMATCH INCLUDE
+ ENDCASE
+ CASE AT START
+  PERFORM CLN_S1:
+  START &STARTAT
+  STOP  &STOPAT
+  STOP  DBMSERRORS &DBMSERROR
+  LOG DBMSERR MSG OFF
+  LOG DUPL    MSG OFF
+  LOG INVALID MSG OFF
+  LOG NOMATCH MSG OFF
+  LOG FORMAT  MSG OFF
+  LOG ACCEPT  MSG OFF
+  LOG TRANS   MSG OFF
+ ENDCASE
+ DATA ON dfix/iteratordir/DMORD
+END
+-RUN
+-TYPE  (ICM18744) Ending Load
+-SET &&CM__RETURN = IF &TRANS EQ 0 THEN 18708 ELSE &FOCERRNUM;
+-:ENDJOB
+-TYPE  (ICM18040) Return Code = &&CM__RETURN
+SET CASESTAT=OFF
+SET EMGSRV=ON
+-TYPE  (ICM18076) Request: &FOCFEXNAME - finished processing
+-SET &&CM__FOCCPU = &FOCCPU.EVAL - &&CM__FOCCPU;
+-TYPE  (ICM18007) CPU Time : &&CM__FOCCPU
+-*[Main Condition]
+-*[Main End]
+-*[Dependence]
+-:ENDDEP
+SET PANEL=0
+SET MORE=ON
+SET 2PARTNAME=OFF
+-RUN

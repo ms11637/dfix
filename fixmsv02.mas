@@ -1,0 +1,19 @@
+FILENAME=FIXMSV02, SUFFIX=DFIX     ,                                            
+ DATASET=dfix/fixmsv02.csv, $                                                   
+  SEGMENT=FIXMSV02, SEGTYPE=S1, $                                               
+    FIELDNAME=RECORD_NUM, ALIAS=RECORD_NUM, USAGE=A08, ACTUAL=A08,              
+      TITLE='Record Number', $                                                  
+    FIELDNAME=ALPHA_A20, ALIAS=ALPHA_A20, USAGE=A20, ACTUAL=A20,                
+      TITLE='Alpha A20', MISSING=ON, $                                          
+    FIELDNAME=ALPHA_A12V, ALIAS=ALPHA_A12V, USAGE=A12V, ACTUAL=A12V,            
+      TITLE='Alpha A12V', MISSING=ON, $                                         
+    FIELDNAME=ALPHA_A10W, ALIAS=ALPHA_A10W, USAGE=A10V, ACTUAL=A10W,            
+      TITLE='Alpha A10W', MISSING=ON, $                                         
+    FIELDNAME=INTEGER_I5, ALIAS=INTEGER_I5, USAGE=I5, ACTUAL=I04,               
+      TITLE='Integer I5', MISSING=ON, $                                         
+    FIELDNAME=FLOAT_F9X2, ALIAS=FLOAT_F9X2, USAGE=F9.2, ACTUAL=F04,             
+      TITLE='Float F9X2', MISSING=ON, $                                         
+    FIELDNAME=DOUBLE_D12X2, ALIAS=DOUBLE_D12X2, USAGE=D12.2, ACTUAL=D08,        
+      TITLE='Double D12X2', MISSING=ON, $                                       
+    FIELDNAME=PACKED_P9X2, ALIAS=PACKED_P9X2, USAGE=P9.2, ACTUAL=P08,           
+      TITLE='Packed P9X2', MISSING=ON, $                                        

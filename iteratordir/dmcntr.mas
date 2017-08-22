@@ -1,0 +1,6 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=DMCNTR, SUFFIX=SQLORA  , TRANS_FILE=_EDAHOME/NLS/dt,
+ REMARKS='Sample - Counter', $
+  SEGMENT=DMCNTR, SEGTYPE=S0, $
+    FIELDNAME=CNTR, ALIAS=CNTR, USAGE=I5, ACTUAL=I2,
+      TITLE='Counter', DESCRIPTION='Counter', $

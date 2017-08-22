@@ -1,0 +1,7 @@
+-*-----------------------------------------------------------------------------*
+-* Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+-*FEX_DESCRIPTION=FILEDEF issued for decode file
+-*-----------------------------------------------------------------------------*
+FILEDEF DMDCD DISK dfix/iteratordir/dmdcd.ftm
+-RUN
+-TYPE (ICM1) Filedef for State decode file returned &RETCODE

@@ -1,0 +1,9 @@
+[Version Information]
+Flow Version = 1
+[DataFlow SourceTargetView]
+DataFlowChildWindow(sql:) = 0,210,48,258,96,0,0
+DataFlowChildWindow(src:dmsale:t1) = 0,104,48,152,96,0,0
+DataFlowChildWindow(trg:dmreps:1) = 0,358,48,406,96,0,0
+[Dependency View]
+Coord(Item,START_PRC) = 120,30
+Coord(Item,DEP_MAIN) = 240,30

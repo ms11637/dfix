@@ -1,0 +1,4 @@
+[Dependency View]
+Coord(Item,START_PRC) = 120,30
+Coord(Item,DEP_99) = 240,30
+Coord(Item,DEP_MAIN) = 360,30

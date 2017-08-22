@@ -1,0 +1,14 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=dmstartd, SUFFIX=SQLORA  , TRANS_FILE=_EDAHOME/NLS/dt,
+ REMARKS='Sample Target - Employee Start records', $
+  SEGMENT=DMSTART, SEGTYPE=S0, $
+    FIELDNAME=ID_NUM, ALIAS=ID_NUM, USAGE=I6, ACTUAL=I2,
+      TITLE='Employee,ID', DESCRIPTION='Employee ID', $
+    FIELDNAME=START_DATE, ALIAS=START_DATE, USAGE=YYMD, ACTUAL=DATE,
+      TITLE='Starting,Date', DESCRIPTION='Starting Date', $
+    FIELDNAME=STATUS, ALIAS=STATUS, USAGE=A10, ACTUAL=A10,
+      TITLE='Current,Status', DESCRIPTION='Current Status', $
+    FIELDNAME=POSITION, ALIAS=POSITION, USAGE=A2, ACTUAL=A02,
+      TITLE='Position', DESCRIPTION='Position', $
+    FIELDNAME=PAYSCALE, ALIAS=PAYSCALE, USAGE=I6, ACTUAL=I2,
+      TITLE='Pay,Level', DESCRIPTION='Pay Level', $

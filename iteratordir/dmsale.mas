@@ -1,0 +1,12 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=dmsale, SUFFIX=SQLORA  , TRANS_FILE=_EDAHOME/NLS/dt,
+ REMARKS='Sample - Sales', $
+  SEGMENT=DMSALE, SEGTYPE=S0, $
+    FIELDNAME=ORDER_NUM, ALIAS=ORDER_NUM, USAGE=A5, ACTUAL=A05,
+      TITLE='Order,Number', DESCRIPTION='Order Number', $
+    FIELDNAME=PLANT, ALIAS=PLANT, USAGE=A3, ACTUAL=A03,
+      TITLE='Plant,Location', DESCRIPTION='Location Of Manufacturing Plant', $
+    FIELDNAME=EMPID, ALIAS=EMPID, USAGE=A5, ACTUAL=A05,
+      TITLE='Employee,ID', DESCRIPTION='Employee ID', $
+    FIELDNAME=SALESREP, ALIAS=SALESREP, USAGE=A50V, ACTUAL=A50V,
+      TITLE='Sales Rep', DESCRIPTION='Sales Representative', $

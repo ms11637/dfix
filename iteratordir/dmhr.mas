@@ -1,0 +1,69 @@
+$Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+FILENAME=dmhr, SUFFIX=SQLORA  , TRANS_FILE=_EDAHOME/NLS/dt,
+ REMARKS='Sample - Human Resources', $
+  SEGMENT=DMHR, SEGTYPE=S0, $
+    FIELDNAME=ID_NUM, ALIAS=ID_NUM, USAGE=I9, ACTUAL=I04,
+      TITLE='Employee,ID', DESCRIPTION='Employee Identification Number', $
+    FIELDNAME=LNAME, ALIAS=LNAME, USAGE=A14V, ACTUAL=A14V,
+      TITLE='Last,Name', DESCRIPTION='Employee Last Name', $
+    FIELDNAME=FNAME, ALIAS=FNAME, USAGE=A12V, ACTUAL=A12V,
+      TITLE='First,Name', DESCRIPTION='Employee First Name', $
+    FIELDNAME=PLANT, ALIAS=PLANT, USAGE=A3, ACTUAL=A3,
+      TITLE='Plant,Location,Code', DESCRIPTION='Location code of the manufacturing plant', $
+    FIELDNAME=START_DATE, ALIAS=START_DATE, USAGE=YYMD, ACTUAL=DATE,
+      TITLE='Starting,Date', DESCRIPTION='Date of employment', $
+    FIELDNAME=TERM_DATE, ALIAS=TERM_DATE, USAGE=YYMD, ACTUAL=DATE,
+      MISSING=ON,
+      TITLE='Termination,Date', DESCRIPTION='Termination Date', $
+    FIELDNAME=STATUS, ALIAS=STATUS, USAGE=A10V, ACTUAL=A10V,
+      TITLE='Current,Status', DESCRIPTION='Job Status', $
+    FIELDNAME=POSITION, ALIAS=POSITION, USAGE=A2, ACTUAL=A2,
+      TITLE='Position', DESCRIPTION='Job Position', $
+    FIELDNAME=PAYSCALE, ALIAS=PAYSCALE, USAGE=I2, ACTUAL=I02,
+      TITLE='Pay,Level', DESCRIPTION='Pay Level', $
+    DEFINE POSITION_DESC/A17V=IF POSITION EQ 'BM' THEN                           
+    'Plant Manager' ELSE                                                        
+    IF POSITION EQ 'MR' THEN 'Line Worker' ELSE                                 
+    IF POSITION EQ 'TM' THEN 'Line Manager' ELSE                                
+    'Technician';
+      TITLE='Position,Description', DESCRIPTION='Position Description', $
+    DEFINE BYEAR/I4=DTPART(START_DATE,YEAR );
+      TITLE='Beginning,Year', DESCRIPTION='Beginning Year', $
+    DEFINE BQUARTER/I1=DTPART(START_DATE,QUARTER );
+      TITLE='Beginning,Quarter', DESCRIPTION='Beginning Quarter', $
+    DEFINE BMONTH/I2=DTPART(START_DATE,MONTH );
+      TITLE='Beginning,Month', DESCRIPTION='Beginning Month', $
+    DEFINE EYEAR/I4 MISSING ON ALL=DTPART(TERM_DATE,YEAR );
+      TITLE='Ending,Year', DESCRIPTION='Ending Year', $
+    DEFINE EQUARTER/I1 MISSING ON ALL=DTPART(TERM_DATE,QUARTER );
+      TITLE='Ending,Quarter', DESCRIPTION='Ending Quarter', $
+    DEFINE EMONTH/I2 MISSING ON ALL=DTPART(TERM_DATE,MONTH );
+      TITLE='Ending,Month', DESCRIPTION='Ending Month', $
+    DEFINE RESIGN_COUNT/I3=IF STATUS EQ 'RESIGNED' THEN 1                       
+    ELSE 0;
+      TITLE='Resigned,Count', DESCRIPTION='Resigned Count', $
+    DEFINE FIRE_COUNT/I3=IF STATUS EQ 'TERMINAT' THEN 1                         
+    ELSE 0;
+      TITLE='Terminated,Count', DESCRIPTION='Terminated Count', $
+    DEFINE DECLINE_COUNT/I3=IF STATUS EQ 'DECLINED' THEN 1                      
+    ELSE 0;
+      TITLE='Declined,Count', DESCRIPTION='Declined Count', $
+    DEFINE EMP_COUNT/I3=IF STATUS EQ 'EMPLOYED' THEN 1                          
+    ELSE 0;
+      TITLE='Employed,Count', DESCRIPTION='Employed Count', $
+    DEFINE PEND_COUNT/I3=IF STATUS EQ 'PENDING' THEN 1                          
+    ELSE 0;
+      TITLE='Pending,Count', DESCRIPTION='Pending Count', $
+    DEFINE REJECT_COUNT/I3=IF STATUS EQ 'REJECTED' THEN 1                       
+    ELSE 0;
+      TITLE='Rejected,Count', DESCRIPTION='Rejected Count', $
+    DEFINE FULLNAME/A28V=LNAME||', '|FNAME;
+      TITLE='Full Name', DESCRIPTION='Full Name: Last, First', $
+    DEFINE SALARY/D12.2=IF BMONTH LT 4 THEN PAYSCALE * 12321                    
+ ELSE IF BMONTH GE 4 AND BMONTH LT 8 THEN PAYSCALE * 13827                      
+ ELSE PAYSCALE * 14400;
+      TITLE='Salary', DESCRIPTION='Salary', $
+    DEFINE PLANTLNG/A11V=DECODE PLANT (BOS 'Boston' DAL 'Dallas' LA 'Los Angeles'
+                           ORL 'Orlando' SEA 'Seattle' STL 'St Louis'           
+      ELSE 'N/A');
+      TITLE='Plant,Location', DESCRIPTION='Location of the manufacturing plant', $

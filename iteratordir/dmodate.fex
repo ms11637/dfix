@@ -1,0 +1,6 @@
+-*-----------------------------------------------------------------------------*
+-* Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+-*FEX_DESCRIPTION=Set global variable ODATE for use in dmvar data flow
+-*-----------------------------------------------------------------------------*
+-SET &&ODATE = '2005/02/15' ;
+-TYPE Order date &&ODATE

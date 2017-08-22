@@ -1,0 +1,125 @@
+-*DM_JOB_TYPE=1
+-*DM_USERID=dm
+-*DM_REQ_ACT=
+-*DM_REQ_DESC=Rectype used to pivot file with two record types
+-*DM_REQ_COMMENT=Run flow dmrctyp before this one create source file
+-*-----------------------------------------------------------------------------*
+-* Copyright (c) Information Builders, Inc. All rights reserved. @MFSM_NOPROLOG@
+-*-----------------------------------------------------------------------------*
+-:START_PRC
+SET PANEL=9999
+SET NWTIMESTAMP=ON
+SET MORE=OFF
+SET 2PARTNAME=ON
+-RUN
+-*[Variables to Control Request]
+-SET &&CM__TARGET = 'dmedate';
+-SET &&CM__AUTHOR = 'dm';
+-SET &&CM__REQUEST = 'dmpivot';
+-SET &&CM__RETURN = 0;
+-SET &&CM__FOCCPU = &FOCCPU.EVAL;
+-SET &DISP_JOB = PTHDAT (7, 'dmpivot','A7');
+-DEFAULT &DBMSERROR = 10000000
+-DEFAULT &STARTAT = 0
+-DEFAULT &STOPAT  = 1000000000
+-TYPE  (ICM18122) Request - dmpivot (Owner: dm) submitted.
+-GOTO :DEP_MAIN;
+-:DEP_MAIN
+-TYPE  (ICM18741) baseapp/dmedate type Focus/FDS New target
+SET CASESTAT=EXTENDED
+SQL SET UPCASE=OFF; END
+-TYPE  (ICM18429) Issuing PREPARE
+SQL PREPARE SQLIN FROM
+SELECT
+   T1.ID_NUM ,
+   T1.START_DATE ,
+   T2.TERM_DATE
+FROM
+   (dmstart T1  LEFT OUTER JOIN dmterm T2
+       ON
+      T1.ID_NUM  = T2.ID_NUM )
+END
+-RUN
+-SET &&CM__RETURN = IF &FOCERRNUM EQ 14104 THEN 0 ELSE &FOCERRNUM;
+-IF (&&CM__RETURN NE 0) GOTO :ENDJOB;
+-IF (&SQLAPT EQ 'APT') GOTO :SKIPHOLD;
+-TYPE  (ICM18440) Request will process data via NON-Pass Through (NON-APT)
+-TYPE  (ICM18451) HOLD file will be created for output file named: SQLIN.
+SQL EXECUTE SQLIN;
+TABLE ON TABLE HOLD AS
+SQLIN
+ FORMAT INTERNAL
+IF RECORDLIMIT EQ &STOPAT
+END
+-RUN
+-SET &&CM__RETURN = &FOCERRNUM;
+-IF (&&CM__RETURN NE 0) GOTO :ENDJOB;
+-:SKIPHOLD
+EX -lines 7 EDAPUT MASTER,baseapp/dmedate,CV,FILE,
+FILENAME=dmedate, SUFFIX=FOC     ,
+ DATASET=baseapp/dmedate.foc, $
+  SEGMENT=DMEDATE, SEGTYPE=S1, $
+    FIELDNAME=ID_NUM, ALIAS=ID_NUM, USAGE=I4, ACTUAL=I4, $
+    FIELDNAME=START_DATE, ALIAS=START_DATE, USAGE=YYMD, ACTUAL=DATE, $
+    FIELDNAME=TERM_DATE, ALIAS=TERM_DATE, USAGE=YYMD, ACTUAL=DATE, $
+EX EDADEL ACCESS,baseapp/dmedate,IFEXIST
+-TYPE  (ICM18054) Issuing CREATE and DROP TABLE for dmedate
+CREATE FILE baseapp/dmedate DROP
+-RUN
+-SET &&CM__RETURN = &FOCERRNUM;
+-IF (&&CM__RETURN NE 0) GOTO :ENDJOB;
+-TYPE  (ICM18743) Starting Load
+MODIFY FILE baseapp/dmedate
+ FIXFORM FROM SQLIN ALIAS PROPAGATE
+ GOTO MATCHIT1
+ CASE MATCHIT1
+  COMPUTE
+   ID_NUM/I4=E01;
+   START_DATE/YYMD=E02;
+   TERM_DATE/YYMD=E03;
+  MATCH ID_NUM
+   ON MATCH REJECT
+   ON NOMATCH INCLUDE
+  GOTO TOP
+ ENDCASE
+ CASE AT START
+  START &STARTAT
+  STOP  &STOPAT
+  STOP  DBMSERRORS &DBMSERROR
+  LOG DBMSERR MSG OFF
+  LOG DUPL    MSG OFF
+  LOG INVALID MSG OFF
+  LOG NOMATCH MSG OFF
+  LOG FORMAT  MSG OFF
+  LOG ACCEPT  MSG OFF
+  LOG TRANS   MSG OFF
+  TYPE " (ICM18682) Check set to : 0"
+  CHECK OFF
+ ENDCASE
+ DATA VIA SQLGET
+END
+-RUN
+-TYPE  (ICM18744) Ending Load
+-SET &&CM__RETURN = &FOCERRNUM;
+-:ENDJOB
+-TYPE  (ICM18040) Return Code = &&CM__RETURN
+SET CASESTAT=OFF
+SQL SET UPCASE=ON; END
+SET EMGSRV=OFF
+SQL PURGE SQLIN;
+END
+-RUN
+FI SQLIN CLEAR
+SET EMGSRV=ON
+-TYPE  (ICM18076) Request: dmpivot - finished processing
+-SET &&CM__FOCCPU = &FOCCPU.EVAL - &&CM__FOCCPU;
+-TYPE  (ICM18007) CPU Time : &&CM__FOCCPU
+-*[Main Condition]
+-*[Main End]
+-*[Dependence]
+-:ENDDEP
+SET PANEL=0
+SET NWTIMESTAMP=OFF
+SET MORE=ON
+SET 2PARTNAME=OFF
+-RUN

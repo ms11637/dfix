@@ -1,0 +1,9 @@
+[Version Information]
+Flow Version = 0
+[DataFlow SourceTargetView]
+DataFlowChildWindow(sql) = 0,0,0,0,0,0,0
+DataFlowChildWindow(src:dminva_flat_ftp:t1) = 0,390,195,438,243,0,0
+DataFlowChildWindow(trg:dminva_ora:1) = 0,865,217,913,265,0,0
+[Dependency View]
+Coord(Item,START_PRC) = 120,30
+Coord(Item,DEP_MAIN) = 240,30

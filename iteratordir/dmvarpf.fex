@@ -1,0 +1,75 @@
+-*DM_JOB_TYPE=1
+-*DM_REQ_DESC=Process flow to set variable used in filter condition
+-*DM_USERID=dm
+-*DM_CLIENT_RELEASE_GEN=R727707D_1000
+-*DM_SERVER_RELEASE_GEN=R727707D_1000
+ 
+-***************************************************
+ 
+-*FEX_DESCRIPTION=
+-*---------------------------------------------------------------------
+-* Copyright (c) Information Builders, Inc.  All rights reserved.
+-*
+-* _Name_        ===> dm/general/app/dmvarpf.focexec
+-*
+-* _History_:
+-*  Date  Time Who Proj       Project Title
+-* ====== ==== === ====== =============================================
+-* 141210 1826 chk 162571 Move etg-related api from shh to ntfexp
+-* 141210 1550 chk 162571 Move etg-related api from shh to ntfexp
+-*
+-* END %&$
+-*---------------------------------------------------------------------
+-*DM_JOB_TYPE=1
+-*DM_REQ_DESC=Process flow to set variable used in filter condition
+-*DM_USERID=dm
+-*DM_CLIENT_RELEASE_GEN=R727707D_1000
+-*DM_SERVER_RELEASE_GEN=R727707D_1000
+ 
+ 
+-***************************************************
+ 
+-:START_PRC
+SET PANEL=9999
+SET MORE=OFF
+SET 2PARTNAME=ON
+-RUN
+ 
+-*[Variables to Control Request]
+-SET &&CM__AUTHOR = 'dm';
+-SET &&CM__REQUEST = '&FOCFEXNAME.EVAL';
+-SET &&CM__RETURN = 0;
+-SET &&CM__FOCCPU = &FOCCPU.EVAL;
+-SET &&KILL_RPC = 'N';
+-DEFAULT &DBMSERROR = 10000000
+-DEFAULT &STARTAT = 0
+-DEFAULT &STOPAT  = 1000000000
+ 
+-TYPE  (ICM18122) Request - &FOCFEXNAME (Owner: dm) submitted.
+-GOTO :DEP_2;
+ 
+ 
+-*[Main Condition]
+-*[Main End]
+ 
+-*[Dependence]
+-:DEP_2
+-TYPE  (ICM18015) DEP_2: procedure dmvar started.
+ EX dfix/iteratordir/dmvar ODATE='2005/03/06', AS_RPC = yes
+-RUN
+-IF (&&KILL_RPC EQ 'Y') GOTO :STOPRPCS;
+-SET &RET_CODE = IF &&CM__RETURN EQ 0 THEN &FOCERRNUM ELSE &&CM__RETURN;
+-TYPE  (ICM18039) DEP_2 dmvar Return Code = &RET_CODE
+ 
+-:ENDDEP
+-EXIT
+ 
+-:STOPRPCS
+-TYPE  (ICM18094) User termination via KILL_RPC flag
+ 
+END
+-RUN
+SET PANEL=0
+SET MORE=ON
+SET 2PARTNAME=OFF
+-RUN
